@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/QuizApp/static/css/main.01993a42.chunk.css",
-    "main.js": "/QuizApp/static/js/main.68d48e9d.chunk.js",
-    "main.js.map": "/QuizApp/static/js/main.68d48e9d.chunk.js.map",
-    "runtime-main.js": "/QuizApp/static/js/runtime-main.6f1d4bc1.js",
-    "runtime-main.js.map": "/QuizApp/static/js/runtime-main.6f1d4bc1.js.map",
-    "static/js/2.069fe777.chunk.js": "/QuizApp/static/js/2.069fe777.chunk.js",
-    "static/js/2.069fe777.chunk.js.map": "/QuizApp/static/js/2.069fe777.chunk.js.map",
-    "static/js/3.5957b85e.chunk.js": "/QuizApp/static/js/3.5957b85e.chunk.js",
-    "static/js/3.5957b85e.chunk.js.map": "/QuizApp/static/js/3.5957b85e.chunk.js.map",
+    "main.js": "/QuizApp/static/js/main.1dd9a36c.chunk.js",
+    "main.js.map": "/QuizApp/static/js/main.1dd9a36c.chunk.js.map",
+    "runtime-main.js": "/QuizApp/static/js/runtime-main.a2c68cdb.js",
+    "runtime-main.js.map": "/QuizApp/static/js/runtime-main.a2c68cdb.js.map",
+    "static/js/2.5dcc955f.chunk.js": "/QuizApp/static/js/2.5dcc955f.chunk.js",
+    "static/js/2.5dcc955f.chunk.js.map": "/QuizApp/static/js/2.5dcc955f.chunk.js.map",
+    "static/js/3.5c977e8b.chunk.js": "/QuizApp/static/js/3.5c977e8b.chunk.js",
+    "static/js/3.5c977e8b.chunk.js.map": "/QuizApp/static/js/3.5c977e8b.chunk.js.map",
     "index.html": "/QuizApp/index.html",
     "static/css/main.01993a42.chunk.css.map": "/QuizApp/static/css/main.01993a42.chunk.css.map",
-    "static/js/2.069fe777.chunk.js.LICENSE.txt": "/QuizApp/static/js/2.069fe777.chunk.js.LICENSE.txt",
+    "static/js/2.5dcc955f.chunk.js.LICENSE.txt": "/QuizApp/static/js/2.5dcc955f.chunk.js.LICENSE.txt",
     "static/media/Invite.510de0d8.png": "/QuizApp/static/media/Invite.510de0d8.png",
     "static/media/clap.002877ed.gif": "/QuizApp/static/media/clap.002877ed.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.6f1d4bc1.js",
-    "static/js/2.069fe777.chunk.js",
+    "static/js/runtime-main.a2c68cdb.js",
+    "static/js/2.5dcc955f.chunk.js",
     "static/css/main.01993a42.chunk.css",
-    "static/js/main.68d48e9d.chunk.js"
+    "static/js/main.1dd9a36c.chunk.js"
   ]
 }
