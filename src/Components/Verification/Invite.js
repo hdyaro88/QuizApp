@@ -33,11 +33,8 @@ const useStyle = makeStyles((theme) => ({
 const Invite = ({ inviteAccepted, setInviteAccepted }) => {
   const classes = useStyle();
   useEffect(() => {
-      const timeout = setTimeout(() => {
-        setInviteAccepted(true);
-      }, 1000)
-      return () => clearTimeout(timeout)
-  })
+    setInviteAccepted(true);
+  });
   return (
     <Fade in={!inviteAccepted} unmountOnExit mountOnEnter>
       <div

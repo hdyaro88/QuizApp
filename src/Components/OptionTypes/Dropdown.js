@@ -43,7 +43,7 @@ const useStyle = makeStyles((theme) => ({
     width: "100%",
     "& input": {
       fontSize: "18px",
-      lineHeight : "21.6px",
+      lineHeight: "21.6px",
       padding: "0 1rem",
     },
   },
@@ -77,13 +77,12 @@ const DropDown = ({ select, selected, onClick, Options }) => {
   const [value, setValue] = useState(selected);
   const classes = useStyle();
   const { width } = Dimentions();
+  let timer = null;
   const ClickHandler = (value) => {
     select(value);
     setValue(value);
     setMenu(false);
-    setTimeout(() => {
-      onClick();
-    }, 500);
+    onClick();
   };
   useEffect(() => {
     return select(value);

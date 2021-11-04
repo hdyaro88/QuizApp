@@ -3,6 +3,7 @@ import { Alert } from "@material-ui/lab";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { db } from "../HelperFiles/firebase";
 import Dropdown from "./Dropdown";
 import Loading from "./Loading";
 import Question from "./Question";
@@ -41,7 +42,7 @@ export const useStyle = makeStyles({
   MainBtn: {
     display: "flex",
     flexDirection: "column",
-    margin : "1rem 0",
+    margin: "1rem 0",
     "& button": {
       backgroundColor: "#000000",
       color: "#ffffff",
@@ -73,14 +74,12 @@ const FormMain = () => {
   const [form, setForm] = useState(false);
   //   console.log(FormData);
   const demo = useSelector((state) => state.isDemo);
+  const data = useSelector((state) => state.data);
   const DemoHandler = () => {
     setLoading(true);
-    const QuizLoad = setTimeout(() => {
-      dispatch({ type: "demoStart" });
-    }, 2000);
+    dispatch({ type: "demoStart" });
     return () => {
       setLoading(false);
-      clearTimeout(QuizLoad);
     };
   };
   const onSubmit = (data) => {
@@ -95,16 +94,21 @@ const FormMain = () => {
   };
   const QuizStartHandler = () => {
     setLoading(true);
-    const QuizLoad = setTimeout(() => {
-      dispatch({ type: "Filled" });
-    }, 2000);
-    return () => {
-      setLoading(false);
-      clearTimeout(QuizLoad);
-    };
+    const id = new Date().valueOf();
+    const docRef = db.collection("quizData").doc(id.toString());
+    docRef
+      .set({ questions: [...data] })
+      .then(() => {
+        console.log("Success !!");
+        dispatch({ type: "Filled", payload: id });
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log("Error ", err);
+      });
   };
   return (
-    <div className={classes.root , "topBar" }>
+    <div className={(classes.root, "topBar")}>
       {loading && <Loading />}
       <Slide in={!form} direction="down" unmountOnExit timeout={{ enter: 100, exit: 500 }}>
         <div style={{ margin: "auto", position: "absolute" }}>
@@ -125,7 +129,7 @@ const FormMain = () => {
 
       {addMore ? (
         <Slide in={form} direction="up" unmountOnExit timeout={{ enter: 500, exit: 5000 }}>
-          <div style={{ position: "absolute" , maxWidth : "350px" }}>
+          <div style={{ position: "absolute", maxWidth: "350px" }}>
             <Question Qno={Qno} onSubmit={onSubmit} />
           </div>
         </Slide>

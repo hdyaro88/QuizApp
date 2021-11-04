@@ -7,12 +7,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./Context";
-
+import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-      <App />
+        <Router basename="https://hdyaro88.github.io/QuizApp">
+          <App />
+        </Router>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

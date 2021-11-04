@@ -1,4 +1,4 @@
-import { Button,CircularProgress, makeStyles, Slide, TextField, Typography } from "@material-ui/core";
+import { Button, CircularProgress, makeStyles, Slide, TextField, Typography } from "@material-ui/core";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,11 +41,8 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
       return;
     }
     setLoading(true);
-    const LoadTime = setTimeout(() => {
-      onSubmit(data);
-    }, 1000);
+    onSubmit(data);
     return () => {
-      clearTimeout(LoadTime);
       setLoading(false);
     };
   }, [submitClicked]);
@@ -108,9 +105,8 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
           style={{ backgroundColor: "#1976d2", color: "white" }}
           onClick={() => setSubmitClicked(true)}
         >
-         {loading && (
-                <CircularProgress color="inherit" style={{ width: "20px", height: "20px", margin: "0 1rem" }} />
-              )}{" "} Submit
+          {loading && <CircularProgress color="inherit" style={{ width: "20px", height: "20px", margin: "0 1rem" }} />}{" "}
+          Submit
         </Button>
       </div>
     </div>

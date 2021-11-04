@@ -7,7 +7,7 @@ const useStyle = makeStyles((theme) => ({
     margin: "1rem 0",
     position: "relative",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)",
-    border : "1px solid #C4C4CC",
+    border: "1px solid #C4C4CC",
     // filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.15)",
     display: "flex",
     alignItems: "center",
@@ -65,15 +65,17 @@ const Option = ({ value, onClick, No, select, selected }) => {
   const [isSelected, setisSelected] = useState(false);
   const ClickHandler = () => {
     select(value);
-    setTimeout(() => {
-      onClick();
-    }, 500);
+    onClick();
   };
   useEffect(() => {
     setisSelected(selected === value ? true : false);
   }, [select]);
   return (
-    <div key={No} className={`${classes.Option} ${selected === value ? "selected" : ""}`} onClick={() => ClickHandler()}>
+    <div
+      key={No}
+      className={`${classes.Option} ${selected === value ? "selected" : ""}`}
+      onClick={() => ClickHandler()}
+    >
       <OptionNo selected={selected === value} No={No} />
       <Typography style={{ fontWeight: 500, fontSize: "18px" }}>{value}</Typography>
       {selected === value && <Check style={{ position: "absolute", right: "5px", top: "20%" }} />}

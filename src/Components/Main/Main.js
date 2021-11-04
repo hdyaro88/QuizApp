@@ -75,13 +75,14 @@ const Main = React.memo(({ isReallyLoggedIn, data }) => {
   const demo = useSelector((state) => state.isDemo);
   const total = data?.length;
   const [Response, setResponse] = useState([]);
+  const link = useSelector(state => state.link);
   console.log(window.innerWidth);
   return (
     <Grow in={isReallyLoggedIn}>
       <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
         {width >= 600 && (
           <div style={{ height: "35%", width: "100%", display: "flex" }}>
-            <AboutUs data={data?.brand} />
+            <AboutUs link={link} data={data?.brand} />
           </div>
         )}
         <div

@@ -1,6 +1,6 @@
 import { createStore } from "redux";
-
-const initialState = { isDemo: false, isReallyLoggedIn: true, data: [] , formFilled : false };
+import { db } from "../Components/HelperFiles/firebase";
+const initialState = { isDemo: false, isReallyLoggedIn: true, data: [], formFilled: false , link : "" };
 
 const Reducer = (state = initialState, action) => {
   if (action.type === "demoStart") {
@@ -13,12 +13,13 @@ const Reducer = (state = initialState, action) => {
       isReallyLoggedIn: true,
     };
   }
-  if(action.type === "data") {
-      console.log(state.data , action.payload)
-      return {...state , data : [...state.data , action.payload]}
+  if (action.type === "data") {
+    console.log(state.data, action.payload);
+    return { ...state, data: [...state.data, action.payload] };
   }
-  if(action.type === "Filled") {
-    return {...state , formFilled : true};
+  if (action.type === "Filled") {
+    const link = `https://hdyaro88.github.io/QuizApp/quiz?id=${action.payload}`;
+    return { ...state, formFilled: true , link : link };
   }
   return state;
 };
