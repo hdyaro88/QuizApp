@@ -15,7 +15,9 @@ const Rating = ({ select, selected, onClick }) => {
     setIsclicked(true);
     setValue(index);
     select(index);
-    onClick();
+    setTimeout(() => {
+      onClick();
+    }, 500);
   };
   // useEffect(() => {
   //   setValue(selected);

@@ -82,7 +82,9 @@ const DropDown = ({ select, selected, onClick, Options }) => {
     select(value);
     setValue(value);
     setMenu(false);
-    onClick();
+    setTimeout(() => {
+      onClick();
+    }, 500);
   };
   useEffect(() => {
     return select(value);

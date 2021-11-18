@@ -18,7 +18,7 @@ const Reducer = (state = initialState, action) => {
     return { ...state, data: [...state.data, action.payload] };
   }
   if (action.type === "Filled") {
-    const link = `https://hdyaro88.github.io/QuizApp/quiz?id=${action.payload}`;
+    const link = `https://quizapp20.herokuapp.com/quiz?id=${action.payload}`;
     return { ...state, formFilled: true , link : link };
   }
   return state;

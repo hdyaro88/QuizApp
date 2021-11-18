@@ -65,7 +65,9 @@ const Option = ({ value, onClick, No, select, selected }) => {
   const [isSelected, setisSelected] = useState(false);
   const ClickHandler = () => {
     select(value);
-    onClick();
+    setTimeout(() => {
+      onClick();
+    }, 500);
   };
   useEffect(() => {
     setisSelected(selected === value ? true : false);

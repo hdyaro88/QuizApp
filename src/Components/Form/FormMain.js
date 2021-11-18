@@ -77,9 +77,12 @@ const FormMain = () => {
   const data = useSelector((state) => state.data);
   const DemoHandler = () => {
     setLoading(true);
-    dispatch({ type: "demoStart" });
+    const QuizLoad = setTimeout(() => {
+      dispatch({ type: "demoStart" });
+    }, 2000);
     return () => {
       setLoading(false);
+      clearTimeout(QuizLoad);
     };
   };
   const onSubmit = (data) => {
