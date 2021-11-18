@@ -26,8 +26,7 @@
     "react-scripts": "4.0.3",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.1",
-    "web-vitals": "^1.1.2",
-    "immer": ">=9.0.6"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
