@@ -1,4 +1,4 @@
-import { Button, CircularProgress, makeStyles, Slide, TextField, Typography } from "@material-ui/core";
+import { Button, CircularProgress, Icon, makeStyles, Slide, TextField, Typography } from "@material-ui/core";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,13 +60,13 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
         </Typography>
         <TextField
           value={data.question}
-          InputProps={{ startAdornment: <h2>Q</h2> }}
+          InputProps={{ startAdornment: <h2>Q</h2>}}
           onChange={questionHandler}
           className={classes.TextField}
           placeholder="Enter Your Question"
         />
       </div>
-      <div
+      {(data?.type == '0' || data?.type == '1') && <div
         style={{
           display: "flex",
           width: "100%",
@@ -98,7 +98,7 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
           </div>
         )}
         <Button onClick={() => setAddOption(true)}>+ Add Option</Button>
-      </div>
+      </div>}
       <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
         <Button
           variant="contained"

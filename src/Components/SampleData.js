@@ -1,19 +1,19 @@
 export const data = [
     {
       id: "1",
-      question: "What is your name ?",
+      question: "How are you today?",
       type: "0",
-      options: ["harshit", "sumit", "mohit", "shivam"],
+      options: ["Fine", "Great", "Awesome", "Same as Yesterday"],
     },
     {
       id: "2",
       question: "Where are you from?",
       type: "1",
-      options: ["Jaipur", "Gangapur City", "Udaipur", "Ajmer"],
+      options: ["India", "Japan", "America", "England"],
     },
     {
       id: "3",
-      question: "What is your name ?",
+      question: "What is your name?",
       type: "0",
       options: ["harshit", "sumit", "mohit", "shivam"],
     },

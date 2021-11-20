@@ -93,7 +93,7 @@ const Main = React.memo(({ isReallyLoggedIn, data }) => {
         >
           {width < 600 && (
             <div style={{ width: "100%", height: "30%", position: "absolute", top: 0, left: 0 }}>
-              <AboutUsMobile data={data?.brand} />
+              <AboutUs link={link} data={data?.brand} />
             </div>
           )}
           {currQues === "0" && (

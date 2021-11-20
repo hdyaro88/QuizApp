@@ -95,9 +95,11 @@ const Dropdown = React.memo(({ selected, data, setData, Options }) => {
       <TextField
         value={value}
         defaultValue="MCQ"
+        aria-readonly
         onChange={(e) => setValue(e.target.value)}
         className={classes.TextField}
         InputProps={{
+          readOnly : true,
           endAdornment: (
             <IconButton>
               <ArrowDropDown onClick={() => setMenu(!menu)} />

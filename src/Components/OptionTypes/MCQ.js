@@ -87,12 +87,20 @@ const Option = ({ value, onClick, No, select, selected }) => {
 
 const MCQ = ({ select, selected, onClick, Options }) => {
   const classes = useStyle();
+  let charCode = 65;
   return (
     <>
-      <Option No="A" select={select} selected={selected} onClick={onClick} value={Options[0]} />
-      <Option No="B" select={select} selected={selected} onClick={onClick} value={Options[1]} />
-      <Option No="C" select={select} selected={selected} onClick={onClick} value={Options[2]} />
-      <Option No="D" select={select} selected={selected} onClick={onClick} value={Options[3]} />
+      {Options.map((option) => {
+        return (
+          <Option
+            No={String.fromCharCode(charCode++)}
+            select={select}
+            selected={selected}
+            onClick={onClick}
+            value={option}
+          />
+        );
+      })}
       <Button classes={{ root: classes.submit }} variant="contained" endIcon={<ArrowRightAlt />} onClick={onClick}>
         OK
       </Button>

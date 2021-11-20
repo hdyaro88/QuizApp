@@ -73,8 +73,8 @@ const useStyle = makeStyles((theme) => ({
   root: {
     padding: "0.2rem 0.5rem",
     minWidth: "25px",
-    backgroundColor : "#E1E1E1",
-    color : "#000000"
+    backgroundColor : "#F50057",
+    color : "#ffffff"
   },
 }));
 export const Switch = ({ setCurrQues, setDir, Qno, total }) => {
