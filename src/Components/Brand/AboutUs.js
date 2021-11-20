@@ -2,6 +2,7 @@ import { Avatar, makeStyles, Paper, Typography, Link, Button } from "@material-u
 import { Snackbar } from "@material-ui/core";
 import { TitleText18, TitleText16L, TitleText16D } from "../HelperFiles/Custom";
 import clap from "../Assets/clap.gif";
+import copy from "copy-to-clipboard";
 import { useState } from "react";
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -37,7 +38,7 @@ const AboutUs = ({ data, link }) => {
   const classes = useStyle();
   const [copied, setCopied] = useState(false);
   const copyHandler = () => {
-    navigator.clipboard.writeText(link);
+    copy(link);
     setCopied(true);
   };
   const shareHandler = () => {
