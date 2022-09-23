@@ -11,7 +11,12 @@ function App() {
   const demo = useSelector((state) => state.isDemo);
   const login = useSelector((state) => state.isReallyLoggedIn);
   const formFilled = useSelector((state) => state.formFilled);
+<<<<<<< HEAD
   const quizData = useSelector(state => state.data)
+=======
+  const quizData = useSelector((state) => state.data);
+  // hello
+>>>>>>> ff93df9 (changes from new)
   return (
     <div
       style={{
