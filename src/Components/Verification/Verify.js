@@ -2,13 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import VerifyMain from "./VerifyMain";
 import { TextField, Button, makeStyles, Fade, Typography } from "@material-ui/core";
 import { CircularProgress } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
 import verify from "../Assets/Verify.png";
 import firebase from "firebase";
 import { auth } from "../HelperFiles/firebase";
 import { Slide } from "@material-ui/core";
 import axios from "axios";
-import Alert from "@material-ui/lab/Alert";
+import { Alert } from '@mui/material';
 const useStyle = makeStyles((theme) => ({
   root: {
     display: "flex",

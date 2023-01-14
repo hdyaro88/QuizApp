@@ -1,5 +1,5 @@
 import { Button, makeStyles, Slide, Snackbar, TextField, Typography } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { Alert } from '@mui/material';
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
