@@ -1,6 +1,6 @@
 import { CircularProgress, Typography } from "@material-ui/core";
 
-const Loading = () => {
+export const Loading = ({ message }) => {
   return (
     <div
       style={{
@@ -8,6 +8,8 @@ const Loading = () => {
         width: "100%",
         height: "100%",
         zIndex: 30,
+        top: 0,
+        left: 0,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -27,7 +29,7 @@ const Loading = () => {
           margin: "1rem 0",
         }}
       >
-        Please wait while we prepare the quiz for you !
+        {message}
       </Typography>
       <CircularProgress style={{ width: "50px", height: "50px", margin: "0 1rem", color: "#ffffff" }} />
     </div>

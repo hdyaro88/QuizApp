@@ -13,7 +13,8 @@ const useStyle = makeStyles((theme) => ({
     borderRadius: "4px",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     color: "#1C4E80",
-    maxWidth: "100%",
+    width: "100%",
+    maxWidth: "300px",
     minWidth: "75px",
     minHeight: "40px",
     padding: "0px",
@@ -60,9 +61,12 @@ const useStyle = makeStyles((theme) => ({
     margin: "1rem 0",
   },
 }));
-const Option = ({ isSelected, onClick, value }) => {
+export const DropdownOption = ({ isSelected, onClick, value }) => {
   const classes = useStyle();
   const ClickHandler = () => {
+    if (isSelected) {
+      return;
+    }
     onClick(value);
   };
   return (
@@ -109,7 +113,7 @@ const DropDown = ({ select, selected, onClick, Options }) => {
           {Options.map((option, i) => {
             return (
               <>
-                <Option isSelected={selected === option} key={i} onClick={ClickHandler} value={option} />
+                <DropdownOption isSelected={selected === option} key={i} onClick={ClickHandler} value={option} />
               </>
             );
           })}

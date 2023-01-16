@@ -1,6 +1,6 @@
-import { Avatar, makeStyles, Paper, Typography, Link, Button } from "@material-ui/core";
+import { Avatar, makeStyles, Paper, Typography, Button } from "@material-ui/core";
 import { Snackbar } from "@material-ui/core";
-import { TitleText18, TitleText16L, TitleText16D } from "../HelperFiles/Custom";
+import { TitleText18 } from "../HelperFiles/Custom";
 import clap from "../Assets/clap.gif";
 import copy from "copy-to-clipboard";
 import { useState } from "react";
@@ -41,13 +41,13 @@ const AboutUs = ({ data, link }) => {
     copy(link);
     setCopied(true);
   };
-  const shareHandler = () => {
+  const shareHandler = async () => {
     const shareData = {
-      title : "Quiz" ,
-      url : `https://${link}`
-    }
-    navigator.share(shareData);
-  }
+      title: "Quiz",
+      url: `https://${link}`,
+    };
+      await window.navigator.share(shareData);
+  };
   return (
     <Paper className={classes.root} elevation={0}>
       <Snackbar open={copied} autoHideDuration={1000} message="Link Copied" onClose={() => setCopied(false)} />

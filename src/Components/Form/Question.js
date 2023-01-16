@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import { useStyle } from "./FormMain";
-const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
+const Question = ({ onSubmit, setQuestionAdded, Qno, setError }) => {
   const classes = useStyle();
   const [addOption, setAddOption] = useState(false);
   const [submitClicked, setSubmitClicked] = useState(false);
@@ -39,6 +39,14 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
   useEffect(() => {
     if (!submitClicked) {
       return;
+    } else if (submitClicked) {
+      if(data?.type === '0' || data?.type === '1') {
+        if(data?.options.length === 0) {
+          setError("At least 1 option is required");
+          setSubmitClicked(false);
+          return;
+        }
+      }
     }
     setLoading(true);
     onSubmit(data);
@@ -52,7 +60,7 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
         <Typography style={{ margin: "auto", fontWeight: 500 }} variant="body1">
           Please Specify the Question Type
         </Typography>
-        <Dropdown data={data} setData={setData} Options={["MCQ", "Dropdown", "Slider"]} />
+        <Dropdown data={data} setData={setData} Options={["MCQ", "Dropdown", "Slider", "File Upload"]} />
       </div>
       <div style={{ display: "flex", width: "100%", flexWrap: "wrap", margin: "1rem 0", color: "#000000" }}>
         <Typography style={{ margin: "auto", fontWeight: 500 }} variant="body1">
@@ -60,45 +68,58 @@ const Question = ({ onSubmit, setQuestionAdded, Qno }) => {
         </Typography>
         <TextField
           value={data.question}
-          InputProps={{ startAdornment: <h2>Q</h2>}}
+          required="true"
+          InputProps={{ startAdornment: <h2>Q</h2> }}
           onChange={questionHandler}
           className={classes.TextField}
           placeholder="Enter Your Question"
         />
       </div>
-      {(data?.type == '0' || data?.type == '1') && <div
-        style={{
-          display: "flex",
-          width: "100%",
-          flexWrap: "wrap",
-          margin: "1rem 0",
-          color: "#000000",
-          flexDirection: "column",
-        }}
-      >
-        <Typography style={{ margin: "auto", fontWeight: 500 }} variant="body1">
-          Please Enter Options
-        </Typography>
-        {data?.options.map((item, i) => {
-          const index = data.options.indexOf(item);
-          return (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Typography variant="h7">{index + 1}.</Typography>
-              <Typography className={classes.option} key={i}>
-                {item}
-              </Typography>
+      {(data?.type == "0" || data?.type == "1") && (
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            flexWrap: "wrap",
+            margin: "1rem 0",
+            color: "#000000",
+            flexDirection: "column",
+          }}
+        >
+          <Typography style={{ margin: "auto", fontWeight: 500 }} variant="body1">
+            Please Enter Options
+          </Typography>
+          {data?.options.map((item, i) => {
+            const index = data.options.indexOf(item);
+            return (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Typography variant="h7">{index + 1}.</Typography>
+                <Typography className={classes.option} key={i}>
+                  {item}
+                </Typography>
+              </div>
+            );
+          })}
+          {addOption && (
+            <div style={{ display: "flex", justifyContent: "space-around", margin: "1rem 0", alignItems: "center" }}>
+              <Typography variant="h6">{optionNo + 1}</Typography>
+              <TextField value={option} onChange={(e) => setOption(e.target.value)} placeholder="Your Option" />
+              <Button onClick={AddOptionHandler}>Add</Button>
             </div>
-          );
-        })}
-        {addOption && (
-          <div style={{ display: "flex", justifyContent: "space-around", margin: "1rem 0", alignItems: "center" }}>
-            <Typography variant="h6">{optionNo + 1}</Typography>
-            <TextField value={option} onChange={(e) => setOption(e.target.value)} placeholder="Your Option" />
-            <Button onClick={AddOptionHandler}>Add</Button>
-          </div>
-        )}
-        <Button onClick={() => setAddOption(true)}>+ Add Option</Button>
-      </div>}
+          )}
+          <Button
+            onClick={() => {
+              // if (data?.options.length >= 4) {
+              //   setError("Max options can be 4 only !!");
+              //   return;
+              // }
+              setAddOption(true);
+            }}
+          >
+            + Add Option
+          </Button>
+        </div>
+      )}
       <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
         <Button
           variant="contained"

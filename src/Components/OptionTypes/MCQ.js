@@ -14,7 +14,8 @@ const useStyle = makeStyles((theme) => ({
     borderRadius: "10px",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     color: "#1C4E80",
-    maxWidth: "100%",
+    width: "100%",
+    maxWidth: "350px",
     minWidth: "75px",
     minHeight: "50px",
     padding: "0px",
@@ -51,6 +52,14 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: "#F50057",
     color: "#ffffff",
   },
+  optionBox: {
+    width: "100%",
+    padding: "0 0.5rem",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+  },
 }));
 const OptionNo = ({ No, selected }) => {
   const classes = useStyle();
@@ -60,10 +69,13 @@ const OptionNo = ({ No, selected }) => {
     </div>
   );
 };
-const Option = ({ value, onClick, No, select, selected }) => {
+export const MCQOption = ({ value, onClick, No, select, selected }) => {
   const classes = useStyle();
   const [isSelected, setisSelected] = useState(false);
   const ClickHandler = () => {
+    if (isSelected) {
+      return;
+    }
     select(value);
     setTimeout(() => {
       onClick();
@@ -90,17 +102,19 @@ const MCQ = ({ select, selected, onClick, Options }) => {
   let charCode = 65;
   return (
     <>
-      {Options.map((option) => {
-        return (
-          <Option
-            No={String.fromCharCode(charCode++)}
-            select={select}
-            selected={selected}
-            onClick={onClick}
-            value={option}
-          />
-        );
-      })}
+      <div className={classes.optionBox} style={{ height: "280px" }}>
+        {Options.map((option) => {
+          return (
+            <MCQOption
+              No={String.fromCharCode(charCode++)}
+              select={select}
+              selected={selected}
+              onClick={onClick}
+              value={option}
+            />
+          );
+        })}
+      </div>
       <Button classes={{ root: classes.submit }} variant="contained" endIcon={<ArrowRightAlt />} onClick={onClick}>
         OK
       </Button>

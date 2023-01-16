@@ -1,19 +1,31 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import Main from "./Components/Main/Main";
-import Test from "./Components/Test";
-import VerifyMain from "./Components/Verification/VerifyMain";
+import QuizAbstract from "./Components/Abstract/Main";
 import FormMain from "./Components/Form/FormMain";
 import { data } from "./Components/SampleData";
 import { Switch, Route } from "react-router-dom";
-import AbstractQuiz from "./Components/Abstract/AbstractQuiz";
-function App() {
+import ResponseMain from "./Components/Response/ResponseMain";
+import Main404 from "./Components/404/404";
+import { useEffect } from "react";
+import AllResponseMain from "./Components/AllResponses/AllResponseMain";
+let initial = true;
+function App({ error, setError }) {
   const dispatch = useDispatch();
   const demo = useSelector((state) => state.isDemo);
   const login = useSelector((state) => state.isReallyLoggedIn);
   const formFilled = useSelector((state) => state.formFilled);
   const quizData = useSelector((state) => state.data);
+  const quizDetails = useSelector((state) => state.quizDetails);
+  const context = useSelector((state) => state);
+  useEffect(() => {
+    if (initial) {
+      initial = false;
+      return;
+    }
+    localStorage.setItem("context-data", JSON.stringify(context));
+  }, [context]);
+  // console.log(demo, quizData);
   return (
     <div
       style={{
@@ -27,12 +39,32 @@ function App() {
     >
       <Switch>
         <Route exact path="/">
-          {!demo && !formFilled && <FormMain />}
-          {demo && <Main isReallyLoggedIn={demo} data={data} />}
-          {formFilled && <Main isReallyLoggedIn={login} data={quizData} />}
+          {initial ? (
+            <FormMain setError={setError} />
+          ) : !demo && !formFilled ? (
+            <FormMain setError={setError} />
+          ) : (
+            <Main404 />
+          )}
+        </Route>
+        <Route exact path="/demo">
+          {demo ? <Main isReallyLoggedIn={demo} data={data} setError={setError} /> : <Main404 />}
+        </Route>
+        <Route exact path="/quizadmin">
+          {/* {console.log("hello")} */}
+          {formFilled ? <Main isReallyLoggedIn={login} data={quizData} setError={setError} /> : <Main404 />}
         </Route>
         <Route exact path="/quiz">
-          <AbstractQuiz/>
+          <QuizAbstract />
+        </Route>
+        <Route path="/responses" exact>
+          <ResponseMain />
+        </Route>
+        <Route path="/fetch-responses" exact>
+          <AllResponseMain setError={setError} />
+        </Route>
+        <Route path="*">
+          <Main404 />
         </Route>
       </Switch>
     </div>

@@ -29,10 +29,15 @@ const Slider = ({ select, selected, onClick }) => {
   const classes = useStyle();
   const handleChange = (e, newValue) => {
     setValue(newValue);
+    // console.log(newValue)
+    select(newValue);
+    setTimeout(() => {
+      onClick();
+    }, 500);
   };
   const submit = () => {
     select(value);
-    onClick();
+      onClick();
   };
   return (
     <div>
@@ -41,11 +46,16 @@ const Slider = ({ select, selected, onClick }) => {
       </Typography>
       <Range
         classes={{ root: classes.slider, track: classes.track, rail: classes.rail, thumb: classes.thumb }}
+        onChangeCommitted={handleChange}
         defaultValue={50}
         value={value}
-        onChange={handleChange}
       />
-      <Button classes={{ root: classes.submit }} variant="contained" endIcon={<ArrowRightAlt />} onClick={submit}>
+      <Button
+        classes={{ root: classes.submit }}
+        variant="contained"
+        endIcon={<ArrowRightAlt />}
+        onClick={() => submit()}
+      >
         OK
       </Button>
     </div>

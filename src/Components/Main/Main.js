@@ -1,6 +1,6 @@
 import { withStyles, makeStyles, Typography, Button } from "@material-ui/core";
 import Question from "../Question";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Main.css";
 import AboutUs from "../Brand/AboutUs";
 import AboutInfu from "../Influencer/AboutInflu";
@@ -10,7 +10,11 @@ import { AboutUsMobile } from "../Brand/AboutUs";
 import React from "react";
 import { CheckCircle } from "@material-ui/icons";
 import { Grow } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { saveResponses } from "../ApiHandlers/Handlers";
+import Loading from "../Form/Loading";
+import { Link, useHistory } from "react-router-dom";
+import MenuMain from "../Menu/MenuMain";
 const useStyle = makeStyles((theme) => ({
   Question: {
     // border: "1px solid black",
@@ -66,20 +70,51 @@ export const QuesNo = withStyles({
     lineHeight: "28px",
   },
 })(Typography);
-const Main = React.memo(({ isReallyLoggedIn, data }) => {
+const Main = React.memo(({ isReallyLoggedIn, data, setError }) => {
   const classes = useStyle();
-  console.log(data);
+  // console.log(data);
   const [currQues, setCurrQues] = useState("0");
+  const [loading, setLoading] = useState(false);
+  const [retake, setRetake] = useState(false);
+  const history = useHistory();
   const { width } = Dimentions();
   const [dir, setDir] = useState("left");
   const demo = useSelector((state) => state.isDemo);
   const total = data?.length;
   const [Response, setResponse] = useState([]);
-  const link = useSelector(state => state.link);
-  console.log(window.innerWidth);
+  const link = useSelector((state) => state.link);
+  const quizInfo = useSelector((state) => state.quizDetails);
+  const dispatch = useDispatch();
+  const timer = useRef(null);
+  // console.log(window.innerWidth);
+  const retakeHandler = () => {
+    setLoading(true);
+    setRetake(true);
+    timer.current = setTimeout(() => {
+      dispatch({ type: "retake" });
+      setResponse([]);
+      setCurrQues("0");
+    }, 300);
+  };
+  const endDemoHandler = () => {
+    dispatch({ type: "reset" });
+    history.replace("/");
+  };
+  useEffect(() => {
+    if (+currQues >= total + 1) {
+      // console.log(quizInfo);
+      saveResponses(quizInfo.quizId, quizInfo.userId, Response, setLoading, dispatch);
+    }
+  }, [currQues]);
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
   return (
     <Grow in={isReallyLoggedIn}>
       <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
+        <MenuMain onRetake={retakeHandler} />
         {width >= 600 && (
           <div style={{ height: "35%", width: "100%", display: "flex" }}>
             <AboutUs link={link} data={data?.brand} />
@@ -117,20 +152,38 @@ const Main = React.memo(({ isReallyLoggedIn, data }) => {
               setCurrQues={setCurrQues}
               responses={Response}
               setresponse={setResponse}
+              retake={retake}
+              setRetake={setRetake}
             />
           ))}
-          {currQues === (total + 1).toString() && (
-            <div className={classes.QuizEnd}>
-              {console.log(Response)}
-              <Typography style={{ fontSize: "28px", textAlign: "center" }}>
-                Your Response has been Submitted !
-              </Typography>
-              <CheckCircle fontSize="large" style={{ color: "#000000" }} />
-              <Button variant="contained" className={classes.reload} onClick={() => window.location.reload()}>
-                {demo ? "End Demo" : "Retake"}
-              </Button>
-            </div>
-          )}
+          {currQues === (total + 1).toString() &&
+            (loading ? (
+              <Loading message="Your responses are begin saved. Please wait..." />
+            ) : (
+              <div className={classes.QuizEnd}>
+                {console.log(Response)}
+                <Typography style={{ fontSize: "28px", textAlign: "center" }}>
+                  Your Response has been Submitted !
+                </Typography>
+                <CheckCircle fontSize="large" style={{ color: "#000000" }} />
+                <Button
+                  variant="contained"
+                  className={classes.reload}
+                  onClick={() => {
+                    demo ? endDemoHandler() : retakeHandler();
+                  }}
+                >
+                  {demo ? "End Demo" : "Retake"}
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => history.push(`/responses?id=${quizInfo.quizId}`)}
+                  className={classes.reload}
+                >
+                  Show Responses
+                </Button>
+              </div>
+            ))}
           {<Switch setCurrQues={setCurrQues} setDir={setDir} Qno={currQues} total={total} />}
         </div>
       </div>

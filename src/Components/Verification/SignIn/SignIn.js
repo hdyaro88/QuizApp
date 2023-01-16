@@ -4,7 +4,7 @@ import { TextField, Button, makeStyles, Typography } from "@material-ui/core";
 import CountrySelect from "./CountrySelect";
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { CircularProgress } from "@material-ui/core";
-import { Alert } from '@mui/material';
+import { Alert } from "@material-ui/lab";
 import { auth } from "../../HelperFiles/firebase";
 import firebase from "firebase";
 import { Slide, Fade } from "@material-ui/core";
@@ -115,12 +115,26 @@ const SignIn = React.memo(({ isLoggedIn, setIsLoggedIn, SendTo }) => {
           </Typography>
         </div>
       </Fade>
-      <Slide in={!isLoggedIn} timeout={{ enter: 1000, exit: 800 }} direction={!isLoggedIn ? "left" : "right"} unmountOnExit mountOnEnter>
+      <Slide
+        in={!isLoggedIn}
+        timeout={{ enter: 1000, exit: 800 }}
+        direction={!isLoggedIn ? "left" : "right"}
+        unmountOnExit
+        mountOnEnter
+      >
         <div className={classes.root}>
           <div style={{ display: "flex", flexDirection: "column", margin: "1rem 0", width: "100%" }}>
             <div style={{ display: "flex", alignItems: "center", margin: "1rem 0" }}>
               <CountrySelect country={setCountry} />
-              <TextField classes={{ root: classes.TextField }} InputProps={{ classes: { root: classes.TextField_input } }} variant="outlined" type="number" value={Phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter Phone" />
+              <TextField
+                classes={{ root: classes.TextField }}
+                InputProps={{ classes: { root: classes.TextField_input } }}
+                variant="outlined"
+                type="number"
+                value={Phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Enter Phone"
+              />
             </div>
             <div id="recaptcha"></div>
             {Object.keys(alert).length !== 0 && (
@@ -129,7 +143,10 @@ const SignIn = React.memo(({ isLoggedIn, setIsLoggedIn, SendTo }) => {
               </Alert>
             )}
             <Button color="primary" onClick={FetchOTP} variant="contained">
-              {loading && <CircularProgress color="inherit" style={{ width: "20px", height: "20px", margin: "0 1rem" }} />} GET OTP
+              {loading && (
+                <CircularProgress color="inherit" style={{ width: "20px", height: "20px", margin: "0 1rem" }} />
+              )}{" "}
+              GET OTP
             </Button>
           </div>
           {/* <Typography style={{ fontSize: "24px", margin: "0.5rem", textAlign: "center" }}>-OR-</Typography>

@@ -3,11 +3,10 @@ import { useLocation } from "react-router-dom";
 import Loading from "../Form/Loading";
 import { db } from "../HelperFiles/firebase";
 import Main from "../Main/Main";
+import UserInfo from "./UserInfo";
 
 const AbstractQuiz = (props) => {
-  console.log(props.pathname);
   const url = useLocation().search;
-  console.log(url);
   const params = new URLSearchParams(url);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,7 +17,7 @@ const AbstractQuiz = (props) => {
       .get()
       .then((doc) => {
         const data = doc.data();
-        console.log(data);
+        // console.log(data);
         setData([...data.questions]);
         setLoading(false);
       })
@@ -29,7 +28,7 @@ const AbstractQuiz = (props) => {
   }, []);
   return (
     <>
-      {loading && <Loading />}
+      {loading && <Loading message="Fetching the questions , Please wait..." />}
       <Main isReallyLoggedIn={true} data={data} />
     </>
   );

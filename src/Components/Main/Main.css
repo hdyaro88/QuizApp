@@ -51,27 +51,40 @@
   transition: all 800ms;
 }
 
-.selected  {
-  animation: selected 200ms ease  0ms 2 forwards;
+.selected {
+  animation: selected 200ms ease 0ms 2 forwards;
 }
 
 .topBar {
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  overflow: scroll;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+.topBar::-webkit-scrollbar {
+  display: none;
+}
+.menu-open {
+  animation: menu-open 0.3s ease-in-out 0ms 1 forwards;
+  border-radius: 20px !important;
+}
+.menu-close {
+  animation: menu-close 0.3s ease-in-out 0ms 1 forwards;
+  border-radius: 20px !important;
 }
 
 @keyframes selected {
   0% {
     opacity: 0;
-  } 
+  }
   25% {
-   opacity: 1;
+    opacity: 1;
   }
   50% {
     opacity: 0;
@@ -82,13 +95,34 @@
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes menu-open {
+  0% {
+    width: 50px;
+    height: 50px;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+  }
+}
+@keyframes menu-close {
+  100% {
+    width: 50px;
+    height: 50px;
+  }
+  0% {
+    width: 200px;
+    height: 200px;
+  }
 }

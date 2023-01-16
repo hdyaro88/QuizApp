@@ -7,10 +7,11 @@ const firebaseConfig = {
   storageBucket: "quizreact-7fba1.appspot.com",
   messagingSenderId: "1071091065616",
   appId: "1:1071091065616:web:bc87ffc030c9852ed3fb95",
-  measurementId: "G-X3ZW4WB6KP"
+  measurementId: "G-X3ZW4WB6KP",
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const storage = firebase.storage();
