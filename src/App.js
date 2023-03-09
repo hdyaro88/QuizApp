@@ -11,16 +11,11 @@ function App() {
   const demo = useSelector((state) => state.isDemo);
   const login = useSelector((state) => state.isReallyLoggedIn);
   const formFilled = useSelector((state) => state.formFilled);
-<<<<<<< HEAD
-  const quizData = useSelector(state => state.data)
-=======
   const quizData = useSelector((state) => state.data);
-  // hello
->>>>>>> ff93df9 (changes from new)
   return (
     <div
       style={{
-        width: "inherit",
+        width: "100%",
         height: "100%",
         display: "flex",
         justifyContent: "center",
@@ -28,10 +23,9 @@ function App() {
         overflow: "hidden",
       }}
     >
-      {(!demo && !formFilled) && <FormMain/>}
-      {demo && <Main isReallyLoggedIn={demo} data={data}/>}
-      {formFilled && <Main isReallyLoggedIn={login} data={quizData}/>}
-  
+      {!demo && !formFilled && <FormMain />}
+      {demo && <Main isReallyLoggedIn={demo} data={data} />}
+      {formFilled && <Main isReallyLoggedIn={login} data={quizData} />}
     </div>
   );
 }
