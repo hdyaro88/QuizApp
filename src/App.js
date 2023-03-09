@@ -14,7 +14,6 @@ function App() {
   const login = useSelector((state) => state.isReallyLoggedIn);
   const formFilled = useSelector((state) => state.formFilled);
   const quizData = useSelector((state) => state.data);
-  // hello2
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ function App() {
           {formFilled && <Main isReallyLoggedIn={login} data={quizData} />}
         </Route>
         <Route exact path="/quiz">
-          <AbstractQuiz/>
+          <AbstractQuiz />
         </Route>
       </Switch>
     </div>
